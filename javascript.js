@@ -32,6 +32,8 @@ function playRound(event) {
             case "rock":
                 if (computerChoice == 0) {
                     message.textContent = "Tie! Rock ties with rock!";
+                    playerScore.textContent = `Player Score: ${humanScore}`
+                    botScore.textContent = `Computer Score: ${computerScore}`
                 } else if (computerChoice == 1) {
                     message.textContent = "You Lose! Rock loses to paper!";
                     computerScore++;
@@ -52,6 +54,8 @@ function playRound(event) {
                     botScore.textContent = `Computer Score: ${computerScore}`
                 } else if (computerChoice == 1) {
                     message.textContent = "Tie! Paper ties with paper!";
+                    playerScore.textContent = `Player Score: ${humanScore}`
+                    botScore.textContent = `Computer Score: ${computerScore}`
                 } else {
                     message.textContent = "You Lose! Paper loses against scissors!";
                     computerScore++;
@@ -72,6 +76,8 @@ function playRound(event) {
                     botScore.textContent = `Computer Score: ${computerScore}`
                 } else {
                     message.textContent = "Tie! Scissors ties with scissors!";
+                    playerScore.textContent = `Player Score: ${humanScore}`
+                    botScore.textContent = `Computer Score: ${computerScore}`
                 }
                 break;
             default:

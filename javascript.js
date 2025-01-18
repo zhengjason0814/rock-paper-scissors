@@ -1,63 +1,91 @@
+let humanScore = 0;
+let computerScore = 0;
+
+let buttons = document.querySelector(".choices");
+buttons.addEventListener("click", playRound);
+
+const body = document.querySelector("body");
+
+const message = document.createElement("p");
+const playerScore = document.createElement("p");
+const botScore = document.createElement("p");
+
+message.style.textAlign = "center";
+playerScore.style.textAlign = "center";
+botScore.style.textAlign = "center";
+
+message.textContent = "Press any button choice to play a round!";
+
+body.appendChild(message);
+body.appendChild(playerScore);
+body.appendChild(botScore);
+
 function getComputerChoice() {
-    let number = Math.floor(Math.random() * 3);
-    return number;
+    return Math.floor(Math.random() * 3);
 }
 
-function getHumanChoice() {
-    let choice = prompt("Please enter either rock, paper, or scissors.");
-    return choice.toLowerCase();
-}
-
-function playRound() {
-    let humanScore = 0;
-    let computerScore = 0;
-
-    while (humanScore < 5 && computerScore < 5) {
-        let humanChoice = getHumanChoice();
+function playRound(event) {
+        target = event.target.id;
         let computerChoice = getComputerChoice();
-        switch(humanChoice) {
+
+        switch(target) {
             case "rock":
                 if (computerChoice == 0) {
-                    console.log("Tie! Rock ties with rock!")
+                    message.textContent = "Tie! Rock ties with rock!";
                 } else if (computerChoice == 1) {
-                    console.log("You Lose! Rock loses to paper!")
+                    message.textContent = "You Lose! Rock loses to paper!";
                     computerScore++;
+                    playerScore.textContent = `Player Score: ${humanScore}`
+                    botScore.textContent = `Computer Score: ${computerScore}`
                 } else {
-                    console.log("You Win! Rock wins against rock!")
+                    message.textContent = "You Win! Rock wins against scissors!";
                     humanScore++;
+                    playerScore.textContent = `Player Score: ${humanScore}`
+                    botScore.textContent = `Computer Score: ${computerScore}`
                 }
                 break;
             case "paper":
                 if (computerChoice == 0) {
-                    console.log("You Win! Paper beats rock!");
+                    message.textContent = "You Win! Paper beats rock!";
                     humanScore++;
+                    playerScore.textContent = `Player Score: ${humanScore}`
+                    botScore.textContent = `Computer Score: ${computerScore}`
                 } else if (computerChoice == 1) {
-                    console.log("Tie! Paper ties with paper!");
+                    message.textContent = "Tie! Paper ties with paper!";
                 } else {
-                    console.log("You Lose! Paper loses against scissors!");
+                    message.textContent = "You Lose! Paper loses against scissors!";
                     computerScore++;
+                    playerScore.textContent = `Player Score: ${humanScore}`
+                    botScore.textContent = `Computer Score: ${computerScore}`
                 }
                 break;
             case "scissors":
                 if (computerChoice == 0) {
-                    console.log("You Lose! Scissors loses to rock!");
+                    message.textContent = "You Lose! Scissors loses to rock!";
                     computerScore++;
+                    playerScore.textContent = `Player Score: ${humanScore}`
+                    botScore.textContent = `Computer Score: ${computerScore}`
                 } else if (computerChoice == 1) {
-                    console.log("You Win! Scissors wins against paper!");
+                    message.textContent = "You Win! Scissors wins against paper!";
                     humanScore++;
+                    playerScore.textContent = `Player Score: ${humanScore}`
+                    botScore.textContent = `Computer Score: ${computerScore}`
                 } else {
-                    console.log("Tie! Scissors ties with scissors!");
+                    message.textContent = "Tie! Scissors ties with scissors!";
                 }
                 break;
             default:
                 console.log("Something went wrong!");
                 break;
-        }   
+        } 
+    if (computerScore === 5) {
+        message.textContent = "Computer Wins! Try again next time.";
+        computerScore = 0;
+        humanScore = 0;
     }
-    if (computerScore == 5) {
-        console.log("Computer Wins! Try again next time.");
-    }
-    else {
-        console.log("Congratulations! You won!")
+    else if (humanScore === 5) {
+        message.textContent = "Congratulations! You won!";
+        computerScore = 0;
+        humanScore = 0;
     }
 }
